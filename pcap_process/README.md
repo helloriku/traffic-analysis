@@ -1,6 +1,6 @@
 # scapy-based (bi)flow statistical feature extraction tool
 
-# -usage
+# usage
 
 ```python
 FlowFeatures.py [-p test.pcap]
@@ -11,3 +11,10 @@ optional arguments:
                         offline mode, read a pcap file
 ```
 
+# output
+
+test_tcp.json<br>test_udp.json
+
+```python
+
+```
