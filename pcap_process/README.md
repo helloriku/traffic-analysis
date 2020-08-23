@@ -1,6 +1,6 @@
 # scapy-based (bi)flow statistical feature extraction tool
 
-# usage
+# -usage
 
 ```python
 FlowFeatures.py [-p test.pcap]
