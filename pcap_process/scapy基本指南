@@ -1,0 +1,63 @@
+'''
+#coding:UTF-8
+__author__: rikusann
+'''
+一、读取并解析pcap
+1.  ① packets = rdpcap("*.pcap")      //整体读入，返回<class 'scapy.plist.PacketList'>
+    ② packets = PcapReader("*.pcap")  //按行读入，返回 PcapReader 对象，可迭代
+
+    ③ sniff(offline="*.pcap", session=TCPSession, prn=lambda x: x.summary())
+                                    // <class 'scapy.plist.PacketList'> 同rdpcap
+                                    // session可自定义，prn为扫描时执行操作
+
+2.  通过类似 list 的下标形式定位某包：
+    ① for p in packets:
+    ② packets[0]
+    ③ len(packets) 【rdpcap读取】
+
+3.  访问数据包各层：
+    ① packets[0][1]
+    ② for p in packets:
+        链路层以上 ：p[0]     // <Ether  dst=ff:ff:ff:ff:ff:ff src=52:54:00:5f:42:04 type=ARP |<ARP  hwtype=0x1 ptype=IPv4 hwlen=
+        IP层以上 ：p[1]     // <ARP  hwtype=0x1 ptype=IPv4 hwlen=6 plen=4 op=
+        传输层以上： p[2]     // <UDP  sport=netbios_ns dport=netbios_ns len=58 chksum=0xe196 |<NBNSQueryRequest  NAME_TRN_ID=51
+        ...
+    ③ if p.haslayer("IP"):
+        ip = p.getlayer("IP")
+
+4.  命令：
+    ① raw(packets[1])
+        b'\xff\xff\xff\xff\xff\xff\xb8\xca:\xa4_\x14\x08\x00E\x00\x00N\x05\x1b\x00\x00
+
+    ② hexdump(packets[1])
+        0000  FF FF FF FF FF FF B8 CA 3A A4 5F 14 08 00 45 00  ........:._...E.
+        0010  00 4E 05 1B 00 00 80 11 49 36 83 CA F0 B9 83 CA  .N......I6......
+
+    ③ ls(packets[1])
+        dst        : DestMACField                        = 'ff:ff:ff:ff:ff:ff' (None)
+        src        : SourceMACField                      = 'b8:ca:3a:a4:5f:14' (None)
+        type       : XShortEnumField                     = 2048            (36864)
+        --
+        version    : BitField (4 bits)                   = 4               (4)
+        len        : ShortField                          = 78              (None)
+        id         : ShortField                          = 1307            (1)
+
+    ④ packets[1].summary()
+        Ether / IP / UDP 131.202.240.185:netbios_ns > 131.202.243.255:netbios_ns / NBNSQueryRequest
+
+    ⑤ packets[1].show()
+        ###[ Ethernet ]###
+          dst       = ff:ff:ff:ff:ff:ff
+          src       = b8:ca:3a:a4:5f:14
+          type      = IPv4
+        ###[ IP ]###
+             version   = 4
+             ihl       = 5
+             tos       = 0x0
+             len       = 78
+             frag      = 0
+             ttl       = 128
+             proto     = udp
+
+二、发包/扫描/sniff [https://scapy.readthedocs.io/en/latest/usage.html]
+    e.g. 嗅探TCP会话： sniff(session=TCPSession, prn=lambda x: x.summary(), store=False)
