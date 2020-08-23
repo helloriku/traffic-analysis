@@ -2,6 +2,8 @@
 
 # usage
 
+Two mode: offline , online
+
 ```python
 FlowFeatures.py [-p test.pcap]
 
@@ -15,6 +17,6 @@ optional arguments:
 
 test_tcp.json<br>test_udp.json
 
-```python
+![alt text](https://github.com/helloriku/traffic-analysis/blob/master/pcap_process/json.png)
 
-```
+各变量解释见 FlowFeatures.py
