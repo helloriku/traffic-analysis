@@ -17,6 +17,6 @@ optional arguments:
 
 test_tcp.json<br>test_udp.json
 
-![alt text](https://github.com/helloriku/traffic-analysis/blob/master/pcap_process/json.png)
+![alt text](https://github.com/helloriku/traffic-analysis/blob/master/ExtractFeatures_scapy/Statistical_features/json.png)
 
 各变量解释见 FlowFeatures.py
