@@ -5,10 +5,10 @@ Deep packet a novel approach for encrypted traffic classification using deep lea
 # Usage
 
 ```python
-import 1_preprocess
+import deeppacket_preprocess
 
 pcap_file = 'AIMchat_test.pcapng'
-process_pcap(pcap_file)
+deeppacket_preprocess.process_pcap(pcap_file)
 ```
 
 # Function
