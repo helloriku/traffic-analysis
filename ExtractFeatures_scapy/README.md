@@ -1,4 +1,4 @@
-# sacpy-based features extraction tools
+# scapy-based features extraction tools
 
 ## DeepPacket_features
 
