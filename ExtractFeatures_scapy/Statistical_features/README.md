@@ -1,4 +1,4 @@
-# scapy-based (bi)flow statistical feature extraction tool
+# scapy-based flow statistical feature extraction tool
 
 # usage
 
