@@ -110,7 +110,6 @@ def process_pcap(pcap_file):
             os.makedirs(cur_path)
 
         # every batch_size packets
-
         if dic and i > 0 and i % BATCH_SIZE == 0:
             print('The', batch_index,' batch.')
             # data key as dataframe colums title
@@ -126,7 +125,6 @@ def process_pcap(pcap_file):
         df = pd.DataFrame(dic, columns=columns)
         # print(df)
         df.to_csv(cur_path + '/' + app_name + '_' + traffic_name + '_' + str(batch_index) + '.csv')
-    return True
 
 
 
@@ -138,7 +136,7 @@ if __name__ == '__main__':
     # # print(array.toarray()[0][:72])
     # print(array.todense().tolist()[0])
     # res = process_pcap('AIMchat_test.pcapng')
-    res = process_pcap('../hangouts_audio3.pcapng')
+    process_pcap('../hangouts_audio3.pcapng')
 
 
 
