@@ -4,9 +4,14 @@ Deep packet a novel approach for encrypted traffic classification using deep lea
 
 # Usage
 
-非最终版，使用需<br>import 1_preprocess
+```python
+import 1_preprocess
 
-# function
+pcap_file = 'AIMchat_test.pcapng'
+process_pcap(pcap_file)
+```
+
+# Function
 
 Read a pcap file, and extract features(DeepPacket), finally store as csv files by batch.
 
